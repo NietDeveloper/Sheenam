@@ -9,6 +9,6 @@ namespace Sheenam.Api.Controllers
     {
         [HttpGet]
         public ActionResult<string> Get() =>
-            Ok("Qalay");
+            Ok("Qalay!");
     }
 }
