@@ -3,6 +3,6 @@
     public class DeleteMe
     {
         [Fact]
-        public void ShouldBeSuccessfull => Assert.True(true);
+        public void ShouldBeSuccessFull => Assert.True(true);
     }
 }
