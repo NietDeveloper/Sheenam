@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Force.DeepCloner;
 using Moq;
 using Sheenam.Api.Models.Foundations.Guests;
 
@@ -13,7 +14,7 @@ namespace Sheenam.Api.Tests.Unit.Services.Foundations.Guests
             Guest randomGuest = CreateRandomGuest();
             Guest inputGuest = randomGuest;
             Guest returningGuest = inputGuest;
-            Guest expectedGuest = returningGuest;
+            Guest expectedGuest = returningGuest.DeepClone();
 
             this.storageBrokerMock.Setup(broker =>
                broker.InsertGuestAsync(inputGuest))
@@ -21,15 +22,17 @@ namespace Sheenam.Api.Tests.Unit.Services.Foundations.Guests
 
             // when
             Guest actualGuest =
-                await this.guestService.AddGuestAsync(randomGuest);
+                await this.guestService.AddGuestAsync(inputGuest);
 
             // then
             actualGuest.Should().BeEquivalentTo(expectedGuest);
 
+            // Tek bir ma'rte shaqirilsin
             this.storageBrokerMock.Verify(broker =>
                broker.InsertGuestAsync(inputGuest),
                Times.Once);
 
+            // ja'ne bir ma'rte shaqirilsa Error tasla 
             this.storageBrokerMock.VerifyNoOtherCalls();
         }
     }
