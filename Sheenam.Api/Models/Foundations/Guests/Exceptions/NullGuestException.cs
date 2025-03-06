@@ -3,9 +3,9 @@ using Xeptions;
 
 namespace Sheenam.Api.Models.Foundations.Guests.Exceptions
 {
-    public class NullGuestExceptioncs : Xeption
+    public class NullGuestException : Xeption
     {
-        public NullGuestExceptioncs() 
+        public NullGuestException() 
             : base(message: "Guest is null") 
         { }
     }
