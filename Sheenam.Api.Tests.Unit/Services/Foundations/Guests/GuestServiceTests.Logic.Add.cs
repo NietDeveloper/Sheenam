@@ -34,6 +34,7 @@ namespace Sheenam.Api.Tests.Unit.Services.Foundations.Guests
 
             // ja'ne bir ma'rte shaqirilsa Error tasla 
             this.storageBrokerMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
         }
     }
 }
