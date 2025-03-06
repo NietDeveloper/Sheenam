@@ -67,6 +67,5 @@ namespace Sheenam.Api
             services.AddTransient<IStorageBroker, StorageBroker>();
             services.AddTransient<ILoggingBroker, ILoggingBroker>();
         }
-
     }
 }

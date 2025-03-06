@@ -16,6 +16,6 @@ namespace Sheenam.Api.Brokers.Loggings
         }
         public void LogCritical(Exception exception) =>
             this.logger.LogCritical(exception, exception.Message);
-       
+
     }
 }
