@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Data;
 
 namespace Sheenam.Api.Models.Foundations.Guests
 {
-    public class Guset
+    public class Guest
     {
         public Guid Id { get; set; }
         public string FirstName { get; set; }
