@@ -1,13 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Sheenam.Api.Brokers.Loggings;
 using Sheenam.Api.Brokers.Storages;
 using Sheenam.Api.Models.Foundations.Guests;
-using Sheenam.Api.Models.Foundations.Guests.Exceptions;
 
 namespace Sheenam.Api.Services.Foundation.Guests
 {
-    public class GuestService : IGuestService
+    public partial class GuestService : IGuestService
     {
         private readonly IStorageBroker storageBroker;
         private readonly ILoggingBroker loggingBroker;
@@ -18,27 +16,12 @@ namespace Sheenam.Api.Services.Foundation.Guests
             this.storageBroker = storageBroker;
             this.loggingBroker = loggingBroker;
         }
-
-        public async ValueTask<Guest> AddGuestAsync(Guest guset)
+        public ValueTask<Guest> AddGuestAsync(Guest guest) =>
+            TryCach(async () =>
         {
-            try
-            {
-            if(guset is null)
-            {
-                throw new NullGuestException();
-            }
+            ValidateGuestNotNull(guest);
 
-            return await this.storageBroker.InsertGuestAsync(guset);
-            }
-            catch (NullGuestException nullGuestException)
-            {
-                var guestValidationException =
-                    new GuestValidationExeption(nullGuestException);
-
-                this.loggingBroker.LogError(guestValidationException);
-
-                throw guestValidationException;
-            }
-        } 
+            return await this.storageBroker.InsertGuestAsync(guest);
+        });
     }
 }
