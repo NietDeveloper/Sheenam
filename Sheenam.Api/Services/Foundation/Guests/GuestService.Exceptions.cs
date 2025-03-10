@@ -19,6 +19,10 @@ namespace Sheenam.Api.Services.Foundation.Guests
             {
                 throw CreateAndLogValidationException(nullGuestException);
             }
+            catch(InvalidGuestException invalidGuestException)
+            {
+                throw CreateAndLogValidationException(invalidGuestException);
+            }
         }
 
         private GuestValidationExeption CreateAndLogValidationException(Xeption xeption)
