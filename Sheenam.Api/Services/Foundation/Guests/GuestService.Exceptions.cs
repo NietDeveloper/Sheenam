@@ -22,23 +22,23 @@ namespace Sheenam.Api.Services.Foundation.Guests
             {
                 throw CreateAndLogValidationException(nullGuestException);
             }
-            catch(InvalidGuestException invalidGuestException)
+            catch (InvalidGuestException invalidGuestException)
             {
                 throw CreateAndLogValidationException(invalidGuestException);
             }
-            catch(SqlException sqlException)
+            catch (SqlException sqlException)
             {
                 var failedGuestStorageException = new FailedGuestStorageException(sqlException);
                 throw CreateAndLogCriticalDependencyException(failedGuestStorageException);
             }
-            catch(DuplicateKeyException duplicateKeyException)
+            catch (DuplicateKeyException duplicateKeyException)
             {
-                var alreadExistGuestException = 
+                var alreadExistGuestException =
                     new AlreadyExistGuestException(duplicateKeyException);
 
                 throw CreateAndLogDependencyValidationExeption(alreadExistGuestException);
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 var failedGuestServiceException =
                     new FailedGuestServiceException(exception);
@@ -53,7 +53,7 @@ namespace Sheenam.Api.Services.Foundation.Guests
                     new GuestValidationExeption(xeption);
 
             this.loggingBroker.LogError(guestValidationException);
-            
+
             return guestValidationException;
         }
 
@@ -67,7 +67,7 @@ namespace Sheenam.Api.Services.Foundation.Guests
 
         private GuestDependencyValidationException CreateAndLogDependencyValidationExeption(Xeption xeption)
         {
-            var guestDependencyValidationException = 
+            var guestDependencyValidationException =
                 new GuestDependencyValidationException(xeption);
 
             this.loggingBroker.LogError(guestDependencyValidationException);

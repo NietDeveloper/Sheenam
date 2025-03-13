@@ -1,5 +1,4 @@
-﻿using System;
-using Xeptions;
+﻿using Xeptions;
 
 namespace Sheenam.Api.Models.Foundations.Guests.Exceptions
 {
@@ -8,6 +7,6 @@ namespace Sheenam.Api.Models.Foundations.Guests.Exceptions
         public GuestServiceException(Xeption innerException)
             : base(message: "Guest service error occurred, contact support",
                   innerException)
-        {}
+        { }
     }
 }

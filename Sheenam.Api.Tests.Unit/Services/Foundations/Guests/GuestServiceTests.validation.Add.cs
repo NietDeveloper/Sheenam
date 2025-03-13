@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Moq;
+﻿using Moq;
 using Sheenam.Api.Models.Foundations.Guests;
 using Sheenam.Api.Models.Foundations.Guests.Exceptions;
-using Xeptions;
-using Xunit;
-using Xunit.Sdk;
 
 namespace Sheenam.Api.Tests.Unit.Services.Foundations.Guests
 {
@@ -21,18 +13,18 @@ namespace Sheenam.Api.Tests.Unit.Services.Foundations.Guests
             Guest nullGuest = null;
             var nullGuestException = new NullGuestException();
 
-            var expectedGuestValidationException = 
+            var expectedGuestValidationException =
                 new GuestValidationExeption(nullGuestException);
 
             //when
-            ValueTask <Guest> addGuestTask =
+            ValueTask<Guest> addGuestTask =
                 this.guestService.AddGuestAsync(nullGuest);
 
             //then
             await Assert.ThrowsAsync<GuestValidationExeption>(() =>
             addGuestTask.AsTask());
 
-            this.loggingBrokerMock.Verify(broker => 
+            this.loggingBrokerMock.Verify(broker =>
             broker.LogError(It.Is(SameExceptionAs(expectedGuestValidationException))),
                 Times.Once);
 
@@ -120,7 +112,7 @@ namespace Sheenam.Api.Tests.Unit.Services.Foundations.Guests
                 key: nameof(Guest.Gender),
                 values: "Value is invalid");
 
-            var excpectedGuestException = new 
+            var excpectedGuestException = new
                 GuestValidationExeption(invalidGuestException);
 
             //when
