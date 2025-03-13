@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EFxceptions.Models.Exceptions;
+﻿using EFxceptions.Models.Exceptions;
 using Microsoft.Data.SqlClient;
 using Moq;
 using Sheenam.Api.Models.Foundations.Guests;
@@ -21,7 +16,7 @@ namespace Sheenam.Api.Tests.Unit.Services.Foundations.Guests
             SqlException sqlException = GetSqlError();
             var faildGuestStorageException = new FailedGuestStorageException(sqlException);
 
-            var expectedGuestDependencyException = 
+            var expectedGuestDependencyException =
                new GuestDependencyException(faildGuestStorageException);
 
             this.storageBrokerMock.Setup(broker =>
@@ -37,7 +32,7 @@ namespace Sheenam.Api.Tests.Unit.Services.Foundations.Guests
             addGuestTask.AsTask());
 
             this.storageBrokerMock.Verify(broker =>
-            broker.InsertGuestAsync(someGuest), 
+            broker.InsertGuestAsync(someGuest),
                 Times.Once());
 
             this.loggingBrokerMock.Verify(broker =>
@@ -77,7 +72,7 @@ namespace Sheenam.Api.Tests.Unit.Services.Foundations.Guests
                 addGuestTask.AsTask());
 
             this.storageBrokerMock.Verify(broker =>
-                broker.InsertGuestAsync(someGuest), 
+                broker.InsertGuestAsync(someGuest),
                     Times.Once());
 
             this.loggingBrokerMock.Verify(broker =>
@@ -96,7 +91,7 @@ namespace Sheenam.Api.Tests.Unit.Services.Foundations.Guests
             Guest someGuest = CreateRandomGuest();
             var serviceException = new Exception();
 
-            var failedGuestServiceException = 
+            var failedGuestServiceException =
                 new FailedGuestServiceException(serviceException);
 
             var expectedGuestServiceException =
