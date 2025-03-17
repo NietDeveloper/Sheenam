@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Sheenam.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreateAllTables : Migration
+    public partial class Test : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Gusets",
+                name: "Guests",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -26,7 +26,7 @@ namespace Sheenam.Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Gusets", x => x.Id);
+                    table.PrimaryKey("PK_Guests", x => x.Id);
                 });
         }
 
@@ -34,7 +34,7 @@ namespace Sheenam.Api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Gusets");
+                name: "Guests");
         }
     }
 }

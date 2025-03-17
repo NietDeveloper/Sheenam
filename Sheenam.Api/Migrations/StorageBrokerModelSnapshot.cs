@@ -22,7 +22,7 @@ namespace Sheenam.Api.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Sheenam.Api.Models.Foundations.Guests.Guset", b =>
+            modelBuilder.Entity("Sheenam.Api.Models.Foundations.Guests.Guest", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -51,7 +51,7 @@ namespace Sheenam.Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Gusets");
+                    b.ToTable("Guests");
                 });
 #pragma warning restore 612, 618
         }
