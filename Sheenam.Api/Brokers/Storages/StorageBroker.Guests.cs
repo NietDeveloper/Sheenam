@@ -13,12 +13,11 @@ namespace Sheenam.Api.Brokers.Storages
         {
             using var broker = new StorageBroker(this.configuration);
 
-            EntityEntry<Guest> guestEntityEntry =
-                await broker.Guests.AddAsync(guset);
+            broker.Entry(guset).State = EntityState.Added;
 
             await broker.SaveChangesAsync();
 
-            return guestEntityEntry.Entity;
+            return guset;
 
         }
     }
