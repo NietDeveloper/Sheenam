@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Sheenam.Api.Models.Foundations.Guests;
@@ -19,6 +20,14 @@ namespace Sheenam.Api.Brokers.Storages
 
             return guset;
 
+        }
+
+        public async ValueTask<Guest> SelectGuestByIdAsync(Guid guestId)
+        {
+            var guestWithGuests = await Guests 
+                .FirstOrDefaultAsync(x => x.Id == guestId);
+
+            return await ValueTask.FromResult(guestWithGuests);
         }
     }
 }

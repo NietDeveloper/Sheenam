@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RESTFulSense.Controllers;
 using Sheenam.Api.Models.Foundations.Guests;
@@ -42,6 +43,34 @@ namespace Sheenam.Api.Controllers
             catch (GuestDependencyException  guestDependencyException)
             {
                 return InternalServerError(guestDependencyException.InnerException);
+            }
+            catch (GuestServiceException guestServiceException)
+            {
+                return InternalServerError(guestServiceException.InnerException);
+            }
+        }
+
+        [HttpGet("ById")]
+        public async ValueTask<ActionResult<Guest>> GetGuestByIdAsync(Guid guestId)
+        {
+            try
+            {
+                return await this.guestService.RetrieveGuestByIdAsync(guestId);
+
+            }
+            catch (GuestDependencyException guestDependencyException)
+            {
+                return InternalServerError(guestDependencyException.InnerException);
+            }
+            catch (GuestValidationExeption guestValidationExeption)
+                when (guestValidationExeption.InnerException is InvalidGuestException)
+            {
+                return BadRequest(guestValidationExeption.InnerException);
+            }
+            catch (GuestValidationExeption guestValidationExeption)
+                when (guestValidationExeption.InnerException is NotFoundGuestException)
+            {
+                return NotFound(guestValidationExeption.InnerException);
             }
             catch (GuestServiceException guestServiceException)
             {
